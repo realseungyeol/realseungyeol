@@ -1,0 +1,32 @@
+  body {
+
+  }
+  #sb {
+  word-wrap:break-word;
+
+  }
+  table {
+    width: 210px;   
+    border: 1px solid black;
+    table-layout:fixed;
+  }
+  button {
+    width:50px;
+    height: 50px;
+  }
+  #ac {
+    width:50px;
+    height: 50px;
+  }
+  #sb {
+    border: 3px solid black;
+    height: 75px;
+  }
+  .dsize {
+    width: 105px;
+    height: 50px;
+  }
+  #sboard {
+    width: 200px;
+    height: 80px;
+  }
