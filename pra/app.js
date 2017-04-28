@@ -2,7 +2,12 @@
 var miniexpress = require('./mini-express/mini-express')
 
 var app = miniexpress()
-app.use('static_dir', './static')
+app.use(express.static('public'))
+
+const postParmeterParser = bodyParser.urlencoded({extended: false})
+
+
+app.use(postParmeterParser)
 
 app.get('/get_test.do', (request, response) => {
   response.writeHead(200, {'Content-Type': 'text/plain;charset=UTF-8'})
