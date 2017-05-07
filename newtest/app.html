@@ -1,0 +1,78 @@
+<!DOCTYPE>
+<html>
+<head>
+<style>
+.btn{
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+#rd-btn{
+  height: 100px;
+  width: 311px;
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+  <div>
+    <button class= "btn" id = "btn1"></button>
+    <button class= "btn" id = "btn2"></button>
+    <button class= "btn" id = "btn3"></button>
+  </div>
+  <div>
+    <button class= "btn" id = "btn4"></button>
+    <button class= "btn" id = "btn5"></button>
+    <button class= "btn" id = "btn6"></button>
+  </div>
+  <div>
+    <button class= "btn" id = "btn7"></button>
+    <button class= "btn" id = "btn8"></button>
+    <button class= "btn" id = "btn9"></button>
+  </div>
+  <button id= "rd-btn" onClick= "rdbtn()">섞기</button>
+</body>
+<script>
+
+function rdbtn() {
+  var rddbtn = document.querySelectorAll(".btn")
+  var gg = 0;
+  function shuffleRandom(){
+          var ar = new Array();
+          var temp;
+          var rnum;
+
+          for(var i=1; i<=9; i++){
+              ar.push(i);
+          }
+
+          for(var i=0; i< 9 ; i++)
+          {
+              rnum = Math.floor(Math.random() *9);
+              temp = ar[i];
+              ar[i] = ar[rnum];
+              ar[rnum] = temp;
+          }
+          gg = ar
+          return
+  }
+
+  shuffleRandom();
+  rddbtn[0].innerHTML = gg[0]
+  rddbtn[1].innerHTML = gg[1]
+  rddbtn[2].innerHTML = gg[2]
+  rddbtn[3].innerHTML = gg[3]
+  rddbtn[4].innerHTML = gg[4]
+  rddbtn[5].innerHTML = gg[5]
+  rddbtn[6].innerHTML = gg[6]
+  rddbtn[7].innerHTML = gg[7]
+  rddbtn[8].innerHTML = gg[8]
+}
+
+
+
+
+
+
+</script>
+</html>
