@@ -12,33 +12,65 @@
   width: 311px;
   border: 1px solid black;
 }
+.selected{
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
 </style>
 </head>
 <body>
   <div>
-    <button class= "btn" id = "btn1"></button>
-    <button class= "btn" id = "btn2"></button>
-    <button class= "btn" id = "btn3"></button>
+    <button class= "btn" id = "btn1">1</button>
+    <button class= "btn" id = "btn2">2</button>
+    <button class= "btn" id = "btn3">3</button>
   </div>
   <div>
-    <button class= "btn" id = "btn4"></button>
-    <button class= "btn" id = "btn5"></button>
-    <button class= "btn" id = "btn6"></button>
+    <button class= "btn" id = "btn4">4</button>
+    <button class= "btn" id = "btn5">5</button>
+    <button class= "btn" id = "btn6">6</button>
   </div>
   <div>
-    <button class= "btn" id = "btn7"></button>
-    <button class= "btn" id = "btn8"></button>
-    <button class= "btn" id = "btn9"></button>
+    <button class= "btn" id = "btn7">7</button>
+    <button class= "btn" id = "btn8">8</button>
+    <button class= "btn" id = "btn9">9</button>
   </div>
   <button id= "rd-btn" onClick= "rdbtn()">섞기</button>
 </body>
 <script>
 
+var a=0;
+var rddbtn1 = document.querySelectorAll("#btn1")
+var rddbtn2 = document.querySelectorAll("#btn2")
+var rddbtn3 = document.querySelectorAll("#btn3")
+var rddbtn4 = document.querySelectorAll("#btn4")
+var rddbtn5 = document.querySelectorAll("#btn5")
+var rddbtn6 = document.querySelectorAll("#btn6")
+var rddbtn7 = document.querySelectorAll("#btn7")
+var rddbtn8 = document.querySelectorAll("#btn8")
+var rddbtn9 = document.querySelectorAll("#btn9")
+
+
+
+
+
 function rdbtn() {
   var rddbtn = document.querySelectorAll(".btn")
-  var gg = 0;
+
+  // for(i=0;i<=8;i++){
+  //   if(rddbtn[i]==9){
+  //     rddbtn[i].removeClass
+  //     rddbtn[i].className="btn";
+  //   }
+  // }
+
   function shuffleRandom(){
+
           var ar = new Array();
+          a.className="btn";
+
           var temp;
           var rnum;
 
@@ -53,20 +85,34 @@ function rdbtn() {
               ar[i] = ar[rnum];
               ar[rnum] = temp;
           }
-          gg = ar
+          for(i=0;i<=8;i++){
+            rddbtn[i].innerHTML = ar[i]
+            console.log(i);
+            if(ar[i]==9){
+              rddbtn[i].className="selected";
+              a=rddbtn[i];
+            }
+          }
           return
-  }
+}
 
-  shuffleRandom();
-  rddbtn[0].innerHTML = gg[0]
-  rddbtn[1].innerHTML = gg[1]
-  rddbtn[2].innerHTML = gg[2]
-  rddbtn[3].innerHTML = gg[3]
-  rddbtn[4].innerHTML = gg[4]
-  rddbtn[5].innerHTML = gg[5]
-  rddbtn[6].innerHTML = gg[6]
-  rddbtn[7].innerHTML = gg[7]
-  rddbtn[8].innerHTML = gg[8]
+/*
+  1= a[1]
+  coan 1
+    = 4
+    4
+
+*/
+shuffleRandom();
+
+  // rddbtn[1].innerHTML = gg[1]
+  // rddbtn[2].innerHTML = gg[2]
+  // rddbtn[3].innerHTML = gg[3]
+  // rddbtn[4].innerHTML = gg[4]
+  // rddbtn[5].innerHTML = gg[5]
+  // rddbtn[6].innerHTML = gg[6]
+  // rddbtn[7].innerHTML = gg[7]
+  // rddbtn[8].innerHTML = gg[8]
 }
 
 
