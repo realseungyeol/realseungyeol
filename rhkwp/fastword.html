@@ -3,24 +3,22 @@
 <head>
   <style>
    form {
-     border-style: solid;
-     border-color: red;
-     border-width: 1px;
-     height: 450px;
+     border: solid gray 1px;
+
+     height: 470px;
      width: 400px;
      background-color: gray;
    }
    p {
      background-color: white;
      margin : 10px 0px 0px 10px ;
-     /*border-style: solid;
-     border-color: red;
-     border-width: 1px;*/
+     /*border: solid red 1px;*/
      height: 100px;
      width: 380px;
      font-size: 80px;
      text-align: center;
      color: green;
+     padding : 0 0 10 0;
    }
    li{
      /*border : solid red 1px;*/
@@ -29,20 +27,24 @@
      font-size: 30px;
      margin : 10px 0px 0px 0px;
      background-color: orange;
+     text-align: center;
+     padding-top: 5px;
    }
    a {
-    /*margin : 5000 0 0 ;*/
+    margin : 5000 0 0 0;
     border : solid gray 1px;
 
    }
    .scoreboard {
+     font-weight:bold;
      /*border : solid red 1px;*/
      background-color: silver;
-     height: 50px;
+     height: 52px;
      width: 240px;
-     margin : 8px 100px 0px 130px;
+     margin : 7px 100px 0px 130px;
      font-size: 30px;
      text-align: center;
+     padding-top: 5px;
 
    }
    ul {
@@ -54,14 +56,19 @@
      width: 380px;
      font-size: 80px;
      text-align: center;
-
-      }
+    }
+    #passcount {
+      color: blue;
+    }
+    #failcount {
+      color: red;
+    }
   </style>
 </head>
 <body>
   <form>
     <div>
-      <p  id = "board" type = "text">aaa</p>
+      <p  id = "board" type = "text">aa</p>
     </div>
 
         <div>
@@ -72,16 +79,59 @@
       </ul>
     </div>
     <a>
-      <div class= "scoreboard" id = "totalcount">232323</div>
-      <div class= "scoreboard" id = "passcount">232323</div>
-      <div class= "scoreboard" id = "failcount">232323</div>
+      <div class= "scoreboard" id = "totalcount">0</div>
+      <div class= "scoreboard" id = "passcount">0</div>
+      <div class= "scoreboard" id = "failcount">0</div>
     </a>
     <div>
-      <input id = "wellcome" type="text"></input>
+      <input id = "wellcome" type="text" onkeypress="enterkey"></input>
     </div>
   </form>
 </body>
 <script>
+// var words = ["apple", "banana", "candy", "domino","eazy", "frid","gogi"];
+var words = ["a", "b", "c", "d","e", "f","g"];
+var pass  = 0;
+var total = 0;
+var fail  = 0;
+var totalcount = document.getElementById("totalcount");
+var passcount = document.getElementById("passcount");
+var failcount = document.getElementById("failcount");
+var wellcome = document.getElementById("wellcome");
+var board = document.getElementById("board");
+
+// board.innerHTml = words[];
+board.innerHTML = randomItem(words);
+
+function enterkey() {
+  console.log("1")
+        if (window.event.keyCode == 13) {
+console.log("2")
+             numberUp()
+             console.log("wellcome.innerHTML")
+        }
+ return
+} //enterkey
+
+function numberUp() {
+  console.log("1")
+  if (board.innerHTML == wellcome.innerHTML) {
+    passcount.innerHTML = pass;
+    ++pass
+    console.log("2")
+  } if (board.innerHTML !== wellcome.innerHTML) {
+    failcount.innerHTML = fail;
+    ++fail
+  }
+  console.log("3")
+  totalcount.innerHTML = total
+  ++total
+} //numberup
+
+function randomItem(a) {
+  return a[Math.floor(Math.random() * a.length)];
+}
+
 
 </script>
 </html>
