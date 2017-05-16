@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>
-   form {
+   #form {
      border: solid gray 1px;
 
      height: 470px;
@@ -83,11 +83,11 @@
   </style>
 </head>
 <body>
-  <form>
+  <div id = "form">
     <div>
       <!-- <p  id = "board" type = "text">aa</p> -->
       <input id = "board" type = "text">
-      <input id = "wellcome" type="text" onkeyup="enterkey()">
+      <input id = "wellcome" type="text" onKeyPress="enterkey()">
     </div>
     <div>
       <ul>
@@ -97,17 +97,16 @@
       </ul>
     </div>
     <a>
-      <a id = "timer">60초</a>
-      <button id = "timer-btn" >시작 버튼</button>
-      <div class= "scoreboard" id = "totalcount"></div>
-      <div class= "scoreboard" id = "passcount"></div>
-      <div class= "scoreboard" id = "failcount"></div>
+      <a id = "timer">시간</a>
+      <button id = "timer-btn" onClick = "btn()">시작 버튼</button>
+      <div class= "scoreboard" id = "totalcount">0</div>
+      <div class= "scoreboard" id = "passcount">0</div>
+      <div class= "scoreboard" id = "failcount">0</div>
     </a>
-  </form>
+  </div>
 <script>
 "use strict"
 var words = ["apple", "banana", "candy", "domino","eazy", "frid","gogi"];
-// var words = ["a", "b", "c", "d","e", "f","g"];
 var pass=0;
 var total=0;
 var fail=0;
@@ -115,34 +114,46 @@ var totalcount = document.getElementById("totalcount");
 var passcount = document.getElementById("passcount");
 var failcount = document.getElementById("failcount");
 var wellcome = document.getElementById("wellcome");
+var timer = document.getElementById("timer");
 var board = document.getElementById("board");
+var interval;
+var timerNo=5;
 
-// board.innerHTml = words[];
-passcount.innerHTML = pass;
-failcount.innerHTML = fail;
-totalcount.innerHTML = total;
-board.value = "aa";
-//
-// function Rmx() {
-//   // console.log("22");
-//   alert("타임아웃!"+ "성공횟수" + passcount.innerHTML + "실패횟수" + failcount.innerHTML)
-// }
-// function btn() {
-//   // console.log("11");
-//   Rmx();
-// }
-// setTimeout(Rmx(), 3000);
-//
-//
-//
+board.value = randomItem(words);
+
+function btn() {
+  zero();
+  interval = setInterval(()=>{
+    if (timerNo == 0) {
+      clearInterval(interval)
+      alert("타임아웃!"+ "성공횟수" + passcount.innerHTML + "실패횟수" + failcount.innerHTML)
+      zero();
+    } else {
+      timer.innerHTML = --timerNo;
+    }
+  }, 1000)
+}
+
+
+function zero() {
+  pass=0;
+  total=0;
+  fail=0;
+  passcount.innerHTML=pass
+  failcount.innerHTML=fail
+  totalcount.innerHTML=total
+}
+
 function enterkey() {
-  console.log("1")
-        if (window.event.keyCode == 13) {
-console.log("2")
-             numberUp()
-             console.log(wellcome.value)
-        }
- return
+    console.log(event.keyCode )
+    if (window.event.keyCode == 13) {
+        numberUp()
+        console.log("6")
+
+        board.value = randomItem(words);
+        wellcome.value=""
+    }
+    console.log("7");
 } //enterkey
 
 function numberUp() {
@@ -150,21 +161,19 @@ function numberUp() {
   if (board.value == wellcome.value) {
     ++pass
     passcount.innerHTML = pass;
-
-  } else if (board.value != wellcome.value) {
+  } else {
     console.log("4")
     ++fail
     failcount.innerHTML = fail;
-
   }
   console.log("5")
   ++total
   totalcount.innerHTML = total
 } //numberup
 
-// function randomItem(a) {
-//   return a[Math.floor(Math.random() * a.length)];
-// }
+function randomItem(a) {
+  return a[Math.floor(Math.random() * a.length)];
+}
 
 
 
