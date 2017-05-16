@@ -3,61 +3,59 @@
 <head>
   <style>
    #form {
+     margin : auto;
      border: solid gray 1px;
-
-     height: 470px;
+     height: 405px;
      width: 400px;
      background-color: gray;
+     font-weight:bold;
+     border-radius: 15px;
    }
    #board {
-     background-color: white;
+     background-color: green;
      margin : 10px 0px 0px 10px ;
      /*border: solid red 1px;*/
      height: 100px;
      width: 380px;
      font-size: 80px;
      text-align: center;
-     /*color: green;*/
-     padding : 0 0 10 0;
-   }
-   li{
-     /*border : solid red 1px;*/
-     height: 50px;
-     width: 80px;
-     font-size: 30px;
-     margin : 10px 0px 0px 0px;
-     background-color: orange;
-     text-align: center;
-     padding-top: 5px;
-   }
-   a {
-    margin : 5000 0 0 0;
-    border : solid gray 1px;
-
-   }
-   .scoreboard {
-     font-weight:bold;
-     /*border : solid red 1px;*/
-     background-color: silver;
-     height: 52px;
-     width: 100px;
-     margin : 7px 100px 0px 130px;
-     font-size: 30px;
-     text-align: center;
-     padding-top: 5px;
-     float :inherit;
-
-   }
-   ul {
-     float : left;
+     color: white;
+     padding : 0 0 5 0;
+     border-radius: 15px;
    }
    #wellcome {
-     margin : 10px 0px 0px 10px ;
+     margin : 10px 0px 10px 10px ;
      height: 100px;
      width: 380px;
      font-size: 80px;
      text-align: center;
-    }
+     color :green;
+     border-radius: 15px;
+   }
+   table{
+     /*border : solid re  d 1px;*/
+     margin-left: 9;
+     text-align: center;
+     font-weight:bold;
+     color: black;
+   }
+
+   td{
+     /*border : solid red 1px;*/
+     border-radius: 6px;
+     height: 50px;
+     width: 91px;
+     font-size: 30px;
+     background-color: orange;
+   }
+   .scoreboard {
+     font-weight:bold;
+     background-color: silver;
+     font-size: 30px;
+   }
+   #totalcount {
+     color: black;
+   }
     #passcount {
       color: blue;
     }
@@ -65,47 +63,70 @@
       color: red;
     }
     #timer {
-      /*border : solid red 1px;*/
-      float :right;
-      margin : 30 10 0 0;
-      height: 100px;
-      width: 150px;
       text-align: center;
-      font-size :60px;
-    }
-    #timer-btn {
-      float :right;
-      margin : 6 10 0 0;
-      height: 80px;
-      width: 150px;
+      font-size :43px;
+      font-weight:bold;
+      border-radius: 8px;
+      padding-bottom: 10px;
+      background-color: ivory;
 
     }
+    #timebase {
+      border-radius: 9px;
+      font-weight:bold;
+      font-size :43px;
+      border : solid orange 1px;
+      float : right;
+      height: 104px;
+      width: 94px;
+      margin: 2 9 0 0;
+      background-color: ivory;
+      text-align: center;
+    }
+    #timer-btn {
+      border-width:thick;
+      border-color: skyblue;
+      border-radius: 100px;
+      background-color: turquoise;
+      position: absolute;
+      margin : 110 20 0 201;
+      height: 50px;
+      width: 190px;
+      /*font-weight:bold;*/
+      font-size: 36px;
+    }
+
   </style>
+  <title>갓승열갓승열갓승열갓승열갓승열</title>
+
 </head>
 <body>
   <div id = "form">
     <div>
-      <!-- <p  id = "board" type = "text">aa</p> -->
-      <input id = "board" type = "text">
+      <pre id = "board" type = "text"></pre>
       <input id = "wellcome" type="text" onKeyPress="enterkey()">
     </div>
-    <div>
-      <ul>
-        <li type = "text">총합</li>
-        <li type = "text">성공</li>
-        <li type = "text">실패</li>
-      </ul>
-    </div>
-    <a>
-      <a id = "timer">시간</a>
-      <button id = "timer-btn" onClick = "btn()">시작 버튼</button>
-      <div class= "scoreboard" id = "totalcount">0</div>
-      <div class= "scoreboard" id = "passcount">0</div>
-      <div class= "scoreboard" id = "failcount">0</div>
-    </a>
+    <input id = "timebase" type = "text" placeholder="시간"></input>
+    <button id = "timer-btn" onClick = "btn()" style="cursor:pointer">시작버튼</button>
+    <table>
+      <tr>
+        <td type = "text">총합</td>
+        <td class= "scoreboard" id = "totalcount">0</td>
+        <td rowspan="3" id = "timer"></td>
+      <tr>
+      </tr>
+        <td type = "text">성공</td>
+        <td class= "scoreboard" id = "passcount">0</td>
+      <tr>
+      </tr>
+        <td type = "text">실패</td>
+        <td class= "scoreboard" id = "failcount">0</td>
+      </tr>
+    </table>
   </div>
 <script>
 "use strict"
+
 var words = ["apple", "banana", "candy", "domino","eazy", "frid","gogi"];
 var pass=0;
 var total=0;
@@ -117,9 +138,9 @@ var wellcome = document.getElementById("wellcome");
 var timer = document.getElementById("timer");
 var board = document.getElementById("board");
 var interval;
-var timerNo=5;
+var timerNo = 25;
 
-board.value = randomItem(words);
+board.innerHTML = randomItem(words);
 
 function btn() {
   zero();
@@ -158,7 +179,7 @@ function enterkey() {
 
 function numberUp() {
   console.log("3")
-  if (board.value == wellcome.value) {
+  if (board.innerHTML == wellcome.value) {
     ++pass
     passcount.innerHTML = pass;
   } else {
@@ -169,6 +190,7 @@ function numberUp() {
   console.log("5")
   ++total
   totalcount.innerHTML = total
+  board.innerHTML = randomItem(words);
 } //numberup
 
 function randomItem(a) {
