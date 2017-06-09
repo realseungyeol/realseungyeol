@@ -1,0 +1,12 @@
+**/.DS_Store
+**/.log
+**/node_modules/
+**/.project
+**/.settings
+**/.gradle/
+**/.vscode/
+**/temp/
+**/.class
+**/bin/
+**/.classpath
+!build.gradle
