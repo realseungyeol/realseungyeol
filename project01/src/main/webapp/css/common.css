@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+<style>
+addres {
+display : inline-block;
+}
+.footer {
+background-color: gold;
+color:blue;
+margin: 10px;
+padding : 10px;
+text-align: center;
+}
+.header {
+color : orange;
+background-color:yellow;
+font-size : 50px;
+height: 100px;
+text-decoration : none;
+}
+#logo {
+float: left;
+}
+#login {
+	
+	color : green;
+float: right;
+}
+.header a{
+text-decoration : none;
+}
+
+.header a:hover {
+	text-decoration : underline;
+}
+
+</style>
