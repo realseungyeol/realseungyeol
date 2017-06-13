@@ -1,5 +1,7 @@
 package bitcamp.java93.filter;
 
+/* 역할: 쿠키로 들어온 세션 ID를 가지고 로그인 여부를 검사한다. */
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -9,47 +11,37 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java93.domain.Member;
 
-@WebFilter("/member/* , /classroom/* , /lect/*")
-public class AuthCheckFilter implements Filter{
+@WebFilter({"/member/*", "/classroom/*", "/lecture/*", "/teacher/*"})
+public class AuthCheckFilter implements Filter {
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
-    // TODO Auto-generated method stub
-    
-  }
+  public void init(FilterConfig filterConfig) throws ServletException {}
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     HttpServletResponse httpResponse = (HttpServletResponse) response;
-    request.setCharacterEncoding("UTF-8");
     
-    String sessionId = httpRequest.getParameter("sessionId");
-    if (sessionId == null) { // 파라미터에 세션 아이디가 없으면 로그인 화면으로 보낸다
-      httpResponse.sendRedirect("../auth/login.html");
-      return;
-    }
+    // 클라이언트가 보낸 쿠기를 꺼낸다.
+//    Member loginMember = (Member)httpRequest.getSession().getAttribute("loginMember");
+//    if (loginMember == null) { // 쿠키에 세션ID가 없다면 로그인 화면으로 보낸다.
+//      httpResponse.sendRedirect("../auth/login");
+//      return;
+//    }
     
-    Member loginMember = (Member)request.getServletContext().getAttribute("id_" + sessionId);
-    if (loginMember == null) { // 로그인안했으면 로그인하라고 보낸다
-      httpResponse.sendRedirect("../auth/login.html");
-      return;
-    }
-    //다음 필터 또는 서블릿을 실행해야 한다.
+    
+    // 다음 필터 또는 서블릿을 실행해야 한다.
     chain.doFilter(request, response);
-    
   }
 
   @Override
-  public void destroy() {
-    // TODO Auto-generated method stub
-    
-  }
+  public void destroy() {}
 
 }

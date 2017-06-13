@@ -82,13 +82,13 @@ public class lectDatail extends HttpServlet {
       
       out.printf("<select name='mrno'>");
       out.printf("<option>매니저를을 선택하세요!</option>");
-      ArrayList<Manager> arrayList1 =  (ArrayList<Manager>)managerDao.selectList();
+      ArrayList<Manager> arrayList1 =  (ArrayList<Manager>)managerDao.selectOne();
       
       for (Manager mgr : arrayList1) {
-        if (lect.getMrno() == mgr.getMrno()) {
-          out.printf("<option value='%s' selected>%s</option>", mgr.getMrno(), mgr.getName());
+        if (lect.getMrno() == mgr.getNo()) {
+          out.printf("<option value='%s' selected>%s</option>", mgr.getNo(), mgr.getName());
         } else {
-          out.printf("<option value='%s'>%s</option>", mgr.getMrno(), mgr.getName());
+          out.printf("<option value='%s'>%s</option>", mgr.getNo(), mgr.getName());
         }
       }
       out.printf("</select><br>\n");

@@ -7,21 +7,41 @@ package bitcamp.java93.domain;
  */
 
 
-public class Manager {
-  int mrno;
-  String name;
+public class Manager extends Member {
+  String posi;
+  String path;
+  String fax;
   
-  public int getMrno() {
-    return mrno;
+  
+  @Override
+  public String toString() {
+    return "Manager [posi=" + posi + ", path=" + path + ", fax=" + fax + ", no=" + no + ", name=" + name + ", tel="
+        + tel + ", email=" + email + ", password=" + password + "]";
   }
-  public void setMrno(int mrno) {
-    this.mrno = mrno;
+
+  public String getPath() {
+    return path;
   }
-  public String getName() {
-    return name;
+
+  public void setPath(String path) {
+    this.path = path;
   }
-  public void setName(String name) {
-    this.name = name;
+
+  public String getFax() {
+    return fax;
   }
+
+  public void setFax(String fax) {
+    this.fax = fax;
     
+  }
+
+  public String getPosi() {
+    return posi;
+  }
+
+  public void setPosi(String posi) {
+    this.posi = posi;
+  }
+  
 }

@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import bitcamp.java93.domain.Member;
 import bitcamp.java93.util.DBConnectionPool;
 
@@ -109,13 +111,21 @@ public class MemberDao {
     Connection con  = conPool.getConnection();
     try (
         PreparedStatement stmt = con.prepareStatement(
-            "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))");) {
+            "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))",
+            Statement.RETURN_GENERATED_KEYS);) {
       
         stmt.setString(1, member.getName());
         stmt.setString(2, member.getTel());
         stmt.setString(3, member.getEmail());
         stmt.setString(4, member.getPassword());
-        return stmt.executeUpdate();
+        int count = stmt.executeUpdate();
+        
+        try (ResultSet rs = stmt.getGeneratedKeys();) {
+        rs.next();
+        member.setNo(rs.getInt(1));
+        }
+        
+        return count;
         
     } finally {
       conPool.returnConnection(con);

@@ -33,12 +33,14 @@ public class com extends HttpServlet {
     rd.include(req, res);
     out.println("</head>");
     out.println("<body>");
-    
+    rd = req.getRequestDispatcher("/header");
     
     
     try {
       out.println("<h1>처음화면</h1>");
       out.println("<a href='member/list'>학생</a>");
+      out.println("<a href='teacher/list'>강사</a>");
+      out.println("<a href='manager/list'>매니저</a>");
       out.println("<a href='croom/list'>강의실</a>");
       out.println("<a href='lect/list'>강의</a>");
       
@@ -61,3 +63,7 @@ public class com extends HttpServlet {
     out.println("</html>");
   }
 }
+
+
+
+

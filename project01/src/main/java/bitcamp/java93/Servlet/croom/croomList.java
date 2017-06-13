@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.CroomDao;
 import bitcamp.java93.domain.Croom;
+import bitcamp.java93.service.CroomService;
 
 @WebServlet(urlPatterns="/croom/list")
 public class croomList extends HttpServlet {
@@ -54,9 +54,10 @@ public class croomList extends HttpServlet {
    
     
     try {
-      CroomDao croomDao = (CroomDao)this.getServletContext().getAttribute("croomDao");
-      System.out.println(croomDao);
-      List<Croom> list = croomDao.selectList(pageNo, pageSize);
+      CroomService croomService = (CroomService)this.getServletContext().getAttribute("croomService");
+      
+      System.out.println(croomService);
+      List<Croom> list = croomService.list(pageNo, pageSize);
       
       out.println("<a href='croomform.html'>강의실개설</a>");
       out.println("<a href='/project01/com'>처음으로</a>");

@@ -18,24 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns="/style/core")
 public class StyleServlet extends HttpServlet {
-  private static final long serialNerstionUID = 1L;
+  private static final long serialVersionUID = 1L;
   
   @Override
   public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     PrintWriter out = res.getWriter();
-    out.println("<style>");
-    out.println("addres {");
-      out.println("display : inline-block;");
-      out.println("}");
-    
-    out.println(".footer {"); 
-     out.println("background-color: gold;");
-     out.println("color:blue;");
-     out.println("margin: 10px;");
-     out.println("padding : 10px;");
-     out.println("text-align: center;");
-    out.println("</style>");
-   
-    
+    out.println("<link rel='stylesheet' href='../css/common.css'>");
   }
 }

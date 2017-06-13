@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java93.dao.MemberDao;
+import bitcamp.java93.service.MemberService;
 import bitcamp.java93.util.DBConnectionPool;
 
 @WebServlet(urlPatterns="/member/delete")
@@ -39,10 +40,10 @@ public class memberDelete extends HttpServlet {
     
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
+      MemberService memberService = (MemberService)this.getServletContext().getAttribute("memberService");
       
       int no = Integer.parseInt(req.getParameter("no"));
-      int count = memberDao.delete(no);
+      int count = memberService.remove(no);
       if (count < 1) {
         throw new Exception(no + "찾지못함");
       }

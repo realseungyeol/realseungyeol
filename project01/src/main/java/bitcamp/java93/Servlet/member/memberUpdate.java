@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.domain.Member;
+import bitcamp.java93.service.MemberService;
 import bitcamp.java93.util.DBConnectionPool;
 
 @WebServlet(urlPatterns="/member/update")
@@ -48,9 +49,9 @@ public class memberUpdate extends HttpServlet {
     out.println("<h1>메뉴등록</h1>");
     
     try {
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
+      MemberService memberService = (MemberService)this.getServletContext().getAttribute("memberService");
       
-      int count = memberDao.update(m);
+      int count = memberService.update();
       if (count < 1) {
         throw new Exception(m.getNo() + "찾지못함");
       }

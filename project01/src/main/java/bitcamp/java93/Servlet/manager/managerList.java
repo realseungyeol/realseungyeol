@@ -3,7 +3,7 @@
  * =>MemberDao를 이용하여 
  */
     
-package bitcamp.java93.Servlet.member;
+package bitcamp.java93.Servlet.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.domain.Member;
-import bitcamp.java93.service.MemberService;
+import bitcamp.java93.domain.Manager;
+import bitcamp.java93.service.ManagerService;
 
-@WebServlet(urlPatterns="/member/list")
-public class memberList extends HttpServlet {
+@WebServlet(urlPatterns="/manager/list")
+public class managerList extends HttpServlet {
   private static final long serialNerstionUID = 1L;
   
   @Override
@@ -54,29 +54,32 @@ public class memberList extends HttpServlet {
     rd = req.getRequestDispatcher("/header");
     rd.include(req, res);
     
-    out.println("<h1>회원목록</h1>");
+    out.println("<h1>매니저목록</h1>");
     
     
     
     try {
-      MemberService memberService = (MemberService)this.getServletContext().getAttribute("memberService");
-      List<Member> list = memberService.list(pageNo, pageSize);
+      ManagerService managerService = (ManagerService)this.getServletContext().getAttribute("managerService");
+      List<Manager> list = managerService.list(pageNo, pageSize);
       
-      out.println("<a href='form.html'>신메뉴</a>");
+      out.println("<a href='form.html'>신강사</a>");
       out.println("<a href='/project01/com'>처음으로</a>");
       
       out.println("<table border='1'>");
       out.println("<thead>");
-      out.println("<tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th></tr>");
+      out.println("<tr><th>번호</th><th>이름</th><th>전화</th><th>이메일</th><th>직급</th><th>사진경로</th><th>펙스</th></tr>");
       out.println("</thead>");
       out.println("<tbody>");
       
-      for (Member m : list) {
+      for (Manager mr : list) {
         out.println("<tr>");
-        out.printf("<td>%d</td>\n", m.getNo());
-        out.printf("<td><a href='detail?no=%d'>%s</a></td>", m.getNo() ,m.getName());
-        out.printf("<td>%s</td>\n", m.getTel());
-        out.printf("<td>%s</td>\n", m.getEmail());
+        out.printf("<td>%d</td>\n", mr.getNo());
+        out.printf("<td><a href='detail?no=%d'>%s</a></td>", mr.getNo() ,mr.getName());
+        out.printf("<td>%s</td>\n", mr.getTel());
+        out.printf("<td>%s</td>\n", mr.getEmail());
+        out.printf("<td>%s</td>\n", mr.getPosi());
+        out.printf("<td>%s</td>\n", mr.getPath());
+        out.printf("<td>%d</td>\n", mr.getFax());
         out.println("</tr>");
       }
       

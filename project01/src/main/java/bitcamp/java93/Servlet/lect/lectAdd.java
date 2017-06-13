@@ -63,11 +63,11 @@ public class lectAdd extends HttpServlet {
     
     out.printf("<select name='mrno'>");
     out.printf("<option>매니저를을 선택하세요!</option>");
-    ArrayList<Manager> arrayList1 =  (ArrayList<Manager>)managerDao.selectList();
+    ArrayList<Manager> arrayList1 =  (ArrayList<Manager>)managerDao.selectOne();
     
     for (Manager mgr : arrayList1) {
       
-        out.printf("<option value='%s'>%s</option>", mgr.getMrno(), mgr.getName());
+        out.printf("<option value='%s'>%s</option>", mgr.getNo(), mgr.getName());
       
     }
     out.printf("</select><br>\n");

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 
 import bitcamp.java93.dao.CroomDao;
 import bitcamp.java93.domain.Croom;
+import bitcamp.java93.service.CroomService;
 
 @WebServlet(urlPatterns="/croom/detail")
 public class croomDetail extends GenericServlet {
@@ -40,12 +41,12 @@ public class croomDetail extends GenericServlet {
    
     
     try {
-      CroomDao croomDao = (CroomDao)this.getServletContext().getAttribute("croomDao");
+      CroomService croomService = (CroomService)this.getServletContext().getAttribute("croomService");
 
       
       int no = Integer.parseInt(req.getParameter("no"));
+      Croom croom = croomService.selectOne(no);
       
-      Croom croom = croomDao.selectOne(no);
       if (croom == null) {
         throw new Exception(no + "번 회원이 없아요ㅕ");
       }

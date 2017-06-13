@@ -2,7 +2,7 @@
  * =>MemberDao를 이용하여 클라이언트로 부터 받은 회원정보를 저장한다.
  */
     
-package bitcamp.java93.Servlet.member;
+package bitcamp.java93.Servlet.teacher;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.MemberDao;
-import bitcamp.java93.domain.Member;
+import bitcamp.java93.domain.Teacher;
+import bitcamp.java93.service.TeacherService;
 
-@WebServlet(urlPatterns="/member/detail")
-public class memberDatail extends HttpServlet {
+@WebServlet(urlPatterns="/teacher/detail")
+public class teacherDatail extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -39,26 +39,29 @@ public class memberDatail extends HttpServlet {
     out.println("<body>");
     rd = req.getRequestDispatcher("/header");
     rd.include(req, res);
-    out.println("<h1>회원조회</h1>");
+    out.println("<h1>강사조회</h1>");
     
     
     try {
       
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
+    TeacherService teacherService = (TeacherService)this.getServletContext().getAttribute("teacherService");
 
       
       int no = Integer.parseInt(req.getParameter("no"));
       
-      Member member = memberDao.selectOne(no);
-      if (member == null) {
+      Teacher teacher = teacherService.get(no);
+      if (teacher == null) {
         throw new Exception(no + "번 회원이 없아요ㅕ");
       }
       out.printf("<form action='update' method='POST'>\n");
-      out.printf("번호 : <input type='text' name='no' value= '%d'readonly><br>\n", member.getNo());
-      out.printf("이름 : <input type='text' name='name' value= '%s'><br>\n", member.getName());
-      out.printf("전화 : <input type='text' name='tel'value= '%s'><br>\n", member.getTel());
-      out.printf("이메일 : <input type='text' name='email'value= '%s'><br>\n", member.getEmail());
+      out.printf("번호 : <input type='text' name='no' value= '%d'readonly><br>\n", teacher.getNo());
+      out.printf("이름 : <input type='text' name='name' value= '%s'><br>\n", teacher.getName());
+      out.printf("전화 : <input type='text' name='tel'value= '%s'><br>\n", teacher.getTel());
+      out.printf("이메일 : <input type='text' name='email'value= '%s'><br>\n", teacher.getEmail());
       out.println("암호 : <input type='password' name='password'><br>\n");
+      out.printf("홈페이지 : <input type='text' name='homepage'value= '%s'><br>\n", teacher.getHomepage());
+      out.printf("페이스북 : <input type='text' name='facebook'value= '%s'><br>\n", teacher.getFacebook());
+      out.printf("트위터 : <input type='text' name='twiter'value= '%s'><br>\n", teacher.getTwiter());
       out.println("<button>변경</button>");
       out.println("<button type='button' onclick='doDelete()'>삭제</button>");
       out.println("<button type='button' onclick='doList()'>목록</button>");

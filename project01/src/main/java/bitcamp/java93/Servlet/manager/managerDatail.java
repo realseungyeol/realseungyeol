@@ -2,7 +2,7 @@
  * =>MemberDao를 이용하여 클라이언트로 부터 받은 회원정보를 저장한다.
  */
     
-package bitcamp.java93.Servlet.member;
+package bitcamp.java93.Servlet.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java93.dao.MemberDao;
-import bitcamp.java93.domain.Member;
+import bitcamp.java93.domain.Manager;
+import bitcamp.java93.service.ManagerService;
 
-@WebServlet(urlPatterns="/member/detail")
-public class memberDatail extends HttpServlet {
+@WebServlet(urlPatterns="/manager/detail")
+public class managerDatail extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -39,26 +39,29 @@ public class memberDatail extends HttpServlet {
     out.println("<body>");
     rd = req.getRequestDispatcher("/header");
     rd.include(req, res);
-    out.println("<h1>회원조회</h1>");
+    out.println("<h1>매니저조회</h1>");
     
     
     try {
       
-      MemberDao memberDao = (MemberDao)this.getServletContext().getAttribute("memberDao");
+      ManagerService managerService = (ManagerService)this.getServletContext().getAttribute("managerService");
 
       
       int no = Integer.parseInt(req.getParameter("no"));
       
-      Member member = memberDao.selectOne(no);
-      if (member == null) {
+      Manager manager = managerService.get(no);
+      if (manager == null) {
         throw new Exception(no + "번 회원이 없아요ㅕ");
       }
       out.printf("<form action='update' method='POST'>\n");
-      out.printf("번호 : <input type='text' name='no' value= '%d'readonly><br>\n", member.getNo());
-      out.printf("이름 : <input type='text' name='name' value= '%s'><br>\n", member.getName());
-      out.printf("전화 : <input type='text' name='tel'value= '%s'><br>\n", member.getTel());
-      out.printf("이메일 : <input type='text' name='email'value= '%s'><br>\n", member.getEmail());
+      out.printf("번호 : <input type='text' name='no' value= '%d'readonly><br>\n", manager.getNo());
+      out.printf("이름 : <input type='text' name='name' value= '%s'><br>\n", manager.getName());
+      out.printf("전화 : <input type='text' name='tel'value= '%s'><br>\n", manager.getTel());
+      out.printf("이메일 : <input type='text' name='email'value= '%s'><br>\n",manager.getEmail());
       out.println("암호 : <input type='password' name='password'><br>\n");
+      out.printf("직급 : <input type='text' name='homepage'value= '%s'><br>\n", manager.getPosi());
+      out.printf("사진경로 : <input type='text' name='facebook'value= '%s'><br>\n", manager.getPath());
+      out.printf("펙스 : <input type='text' name='twiter'value= '%s'><br>\n", manager.getFax());
       out.println("<button>변경</button>");
       out.println("<button type='button' onclick='doDelete()'>삭제</button>");
       out.println("<button type='button' onclick='doList()'>목록</button>");
